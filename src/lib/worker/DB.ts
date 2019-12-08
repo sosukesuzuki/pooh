@@ -2,20 +2,30 @@ import { File } from '../models';
 
 let db: any = null;
 
+function throwNoDexieErrorIfDexieDoesNotExist() {
+    if (!db) {
+        throw new Error('Dexie has not imported yet');
+    }
+}
+
 export function getFiles(): Promise<File[]> {
+    throwNoDexieErrorIfDexieDoesNotExist();
     return db.files.toArray();
 }
 
 export function addFile() {
+    throwNoDexieErrorIfDexieDoesNotExist();
     const newFile = new File();
     return db.files.add(newFile);
 }
 
 export function updateFile(payload: { id: string; content: string }) {
+    throwNoDexieErrorIfDexieDoesNotExist();
     return db.files.put(payload);
 }
 
 export function deleteFile(payload: { id: string }) {
+    throwNoDexieErrorIfDexieDoesNotExist();
     return db.files.delete(payload.id);
 }
 
