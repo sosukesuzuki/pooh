@@ -2,22 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
 import WorkerProxy from './WorkerProxy';
-import { workerContext, useWorkerContext } from './lib/contexts';
+import { workerContext } from './lib/contexts';
+import {
+    FileContextProvider,
+    useFilesContext,
+    useAddFile,
+} from './lib/contexts/filesContext';
 
 const App = () => {
-    const WorkerAPI = useWorkerContext();
+    const { files } = useFilesContext();
+    const addFile = useAddFile();
     return (
         <div>
             <h1>Pooh</h1>
             <button
                 onClick={async () => {
-                    await WorkerAPI.addFile();
-                    const files = await WorkerAPI.getFiles();
-                    console.log(files);
+                    await addFile();
                 }}
             >
                 Add File
             </button>
+            {files.map(file => (
+                <p key={file.id}>{file.id}</p>
+            ))}
         </div>
     );
 };
@@ -26,7 +33,9 @@ async function main(): Promise<void> {
     const proxy = await new (WorkerProxy as any)();
     ReactDOM.render(
         <workerContext.Provider value={proxy}>
-            <App />
+            <FileContextProvider>
+                <App />
+            </FileContextProvider>
         </workerContext.Provider>,
         document.querySelector('.root'),
     );
