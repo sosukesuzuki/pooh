@@ -7,7 +7,8 @@ export function getFiles(): Promise<File[]> {
 }
 
 export function addFile() {
-    return db.files.add(new File());
+    const newFile = new File();
+    return db.files.add(newFile);
 }
 
 export function updateFile(payload: { id: string; content: string }) {
@@ -23,7 +24,7 @@ console.time('worker:load-dexie');
     const Dexie = await import(/* webpackChunkName: "dexie" */ 'dexie');
     db = new Dexie.default('FilesDatabase');
     db.version(1).stores({
-        files: 'content, id',
+        files: 'id, content',
     });
     console.timeEnd('worker:load-dexie');
 })();

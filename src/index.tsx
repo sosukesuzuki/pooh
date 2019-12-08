@@ -1,15 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
 import 'normalize.css';
 import WorkerProxy from './WorkerProxy';
-import { workerContext } from './lib/contexts';
+import { workerContext, useWorkerContext } from './lib/contexts';
 
-const Heading = styled.h1`
-    color: red;
-`;
-
-const App = () => <Heading>Pooh</Heading>;
+const App = () => {
+    const WorkerAPI = useWorkerContext();
+    return (
+        <div>
+            <h1>Pooh</h1>
+            <button
+                onClick={async () => {
+                    await WorkerAPI.addFile();
+                    const files = await WorkerAPI.getFiles();
+                    console.log(files);
+                }}
+            >
+                Add File
+            </button>
+        </div>
+    );
+};
 
 async function main(): Promise<void> {
     const proxy = await new (WorkerProxy as any)();
