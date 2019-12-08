@@ -24,7 +24,7 @@ console.time('worker:load-dexie');
     const Dexie = await import(/* webpackChunkName: "dexie" */ 'dexie');
     db = new Dexie.default('FilesDatabase');
     db.version(1).stores({
-        files: 'id, content',
+        files: 'id, content, createdAt',
     });
     console.timeEnd('worker:load-dexie');
 })();
