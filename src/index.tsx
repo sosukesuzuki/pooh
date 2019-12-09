@@ -8,6 +8,7 @@ import {
     useFilesContext,
     useAddFile,
 } from './lib/contexts';
+import { CurrentFileContextProvider } from './lib/contexts/currentFileContext';
 
 const App = () => {
     const { files } = useFilesContext();
@@ -34,7 +35,9 @@ async function main(): Promise<void> {
     ReactDOM.render(
         <workerContext.Provider value={proxy}>
             <FileContextProvider>
-                <App />
+                <CurrentFileContextProvider>
+                    <App />
+                </CurrentFileContextProvider>
             </FileContextProvider>
         </workerContext.Provider>,
         document.querySelector('.root'),
