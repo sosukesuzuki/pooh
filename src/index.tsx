@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
 import WorkerProxy from './WorkerProxy';
-import { workerContext } from './lib/contexts';
 import {
+    workerContext,
     FileContextProvider,
     useFilesContext,
     useAddFile,
-} from './lib/contexts/filesContext';
+} from './lib/contexts';
 
 const App = () => {
     const { files } = useFilesContext();
