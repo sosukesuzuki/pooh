@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useCurrentFile, useUpdateFile } from '../lib/contexts';
 import debounce from 'lodash.debounce';
@@ -17,24 +17,31 @@ const Container = styled.div`
 const Detail: React.FC = () => {
     const updateFile = useUpdateFile();
     const currentFile = useCurrentFile();
+    const [content, setContent] = useState<undefined | string>(
+        currentFile?.content,
+    );
     const handleChangeTextarea = useCallback(
         (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            e.persist();
             if (!currentFile) {
                 return;
             }
-            updateFile({ id: currentFile.id, content: e.target.value });
+            setContent(e.target.value);
+            debounce(() => {
+                updateFile({ id: currentFile.id, content: e.target.value });
+            }, 200)();
         },
-        [currentFile, debounce],
+        [currentFile?.id, updateFile],
     );
+    useEffect(() => {
+        setContent(currentFile?.content);
+    }, [currentFile?.id]);
     return (
         <Container>
             {currentFile ? (
                 <>
-                    <textarea
-                        value={currentFile.content}
-                        onChange={handleChangeTextarea}
-                    />
-                    <div className="preview">{currentFile.content}</div>
+                    <textarea value={content} onChange={handleChangeTextarea} />
+                    <div className="preview">{content}</div>
                 </>
             ) : (
                 <p>Any file is not selected.</p>
