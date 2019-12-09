@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SideNav from './SideNav';
+import Detail from './Detail';
 
 const Container = styled.div`
     width: 100vw;
@@ -13,6 +14,7 @@ const App: React.FC = () => {
     return (
         <Container>
             <SideNav />
+            <Detail />
         </Container>
     );
 };
