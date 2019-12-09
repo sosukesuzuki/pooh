@@ -1,5 +1,6 @@
 import { expose } from 'comlink';
 import { addFile, updateFile, getFiles, deleteFile } from './DB';
+import { compileMarkdown } from './remark';
 import { File } from '../models';
 
 export class WorkerAPI {
@@ -14,6 +15,9 @@ export class WorkerAPI {
     }
     deleteFile(payload: { id: string }): Promise<void> {
         return deleteFile(payload);
+    }
+    compileMarkdown(value: string): Promise<string> {
+        return compileMarkdown(value);
     }
 }
 

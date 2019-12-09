@@ -40,6 +40,10 @@
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "remark": "^11.0.2",
+    "remark-breaks": "^1.0.3",
+    "remark-emoji": "^2.0.2",
+    "remark-html": "^10.0.0",
     "styled-components": "^4.4.1",
     "uuid": "^3.3.3"
   },
