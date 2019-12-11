@@ -17,7 +17,7 @@ export class WorkerAPI {
         return deleteFile(payload);
     }
     compileMarkdown(value: string): Promise<string> {
-        return compileMarkdown(value);
+        return Promise.resolve(compileMarkdown(value));
     }
 }
 

@@ -1,31 +1,24 @@
 let remark: any = null;
 
-export function compileMarkdown(value: string): Promise<string> {
+export function compileMarkdown(value: string): string {
     if (!remark) {
-        return Promise.resolve(value);
+        return value;
     }
-    return new Promise((resolve, reject) => {
-        remark.process(value, (err: Error, file: any) => {
-            if (err) {
-                reject(err);
-            }
-            resolve(file.toString());
-        });
-    });
+    return remark.processSync(value).toString();
 }
 
 console.time('worker:load-remark');
 (async function(): Promise<void> {
-    const [r, ...plugins] = await Promise.all([
+    const [r1, r2, r3, r4] = await Promise.all([
         import(/* webpackChunkName: "remark" */ 'remark'),
         import(/* webpackChunkName: "remark" */ 'remark-breaks'),
         import(/* webpackChunkName: "remark" */ 'remark-emoji'),
         import(/* webpackChunkName: "remark" */ 'remark-html'),
     ]);
-    remark = r
+    remark = r1
         .default()
-        .use(plugins[0])
-        .use(plugins[1])
-        .use(plugins[2]);
+        .use(r2.default)
+        .use(r3.default)
+        .use(r4.default);
     console.timeEnd('worker:load-remark');
 })();
