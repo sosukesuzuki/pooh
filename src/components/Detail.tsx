@@ -21,6 +21,8 @@ const Container = styled.div`
         overflow-y: scroll;
         background-color: #282a36;
         color: #8be9fd;
+        font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+            monospace;
     }
     .markdown-body {
         box-sizing: border-box;
