@@ -36,6 +36,7 @@
   "dependencies": {
     "comlink": "^4.2.0",
     "dexie": "^2.0.4",
+    "github-markdown-css": "^3.0.1",
     "lodash.debounce": "^4.0.8",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",

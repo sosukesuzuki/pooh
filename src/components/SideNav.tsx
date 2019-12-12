@@ -10,7 +10,7 @@ import { File } from '../lib/models';
 
 const Container = styled.div`
     border-right: 1px solid black;
-    width: 300px;
+    width: 250px;
 `;
 const FileItemList = styled.div`
     overflow-y: scroll;

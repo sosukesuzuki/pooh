@@ -5,7 +5,7 @@ import {
     useUpdateFile,
     useCompiledMarkdown,
 } from '../lib/contexts';
-import debounce from 'lodash.debounce';
+import 'github-markdown-css';
 
 const Container = styled.div`
     width: 100%;
@@ -13,20 +13,26 @@ const Container = styled.div`
     textarea {
         width: 50%;
         resize: none;
+        overflow-y: scroll;
     }
-    .preview {
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
         width: 50%;
+        overflow-y: scroll;
     }
 `;
 const Detail: React.FC = () => {
     const updateFile = useUpdateFile();
     const currentFile = useCurrentFile();
     const [content, setContent] = useState(currentFile?.content ?? '');
-    const compiled = useCompiledMarkdown(content ?? '');
+    const compiled = useCompiledMarkdown(currentFile?.content ?? '');
     useEffect(() => {
         setContent(currentFile?.content ?? '');
     }, [currentFile]);
-
     const handleChangeTextarea = useCallback(
         (e: React.ChangeEvent<HTMLTextAreaElement>) => {
             e.persist();
@@ -34,9 +40,7 @@ const Detail: React.FC = () => {
                 return;
             }
             setContent(e.target.value);
-            debounce(() => {
-                updateFile({ id: currentFile.id, content: e.target.value });
-            }, 200)();
+            updateFile({ id: currentFile.id, content: e.target.value });
         },
         [currentFile, updateFile],
     );
@@ -46,7 +50,7 @@ const Detail: React.FC = () => {
                 <>
                     <textarea value={content} onChange={handleChangeTextarea} />
                     <div
-                        className="preview"
+                        className="markdown-body"
                         dangerouslySetInnerHTML={{ __html: compiled }}
                     />
                 </>
