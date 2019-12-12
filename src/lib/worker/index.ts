@@ -2,6 +2,7 @@ import { expose } from 'comlink';
 import { addFile, updateFile, getFiles, deleteFile } from './DB';
 import { compileMarkdown } from './remark';
 import { File } from '../models';
+import { format } from './prettier';
 
 export class WorkerAPI {
     addFile(): Promise<void> {
@@ -18,6 +19,9 @@ export class WorkerAPI {
     }
     compileMarkdown(value: string): Promise<string> {
         return Promise.resolve(compileMarkdown(value));
+    }
+    formatMarkdown(value: string): Promise<string> {
+        return Promise.resolve(format(value));
     }
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import SideNav from './SideNav';
 import Detail from './Detail';
+import FormatButton from './FormatButton';
 
 const Container = styled.div`
     width: 100vw;
@@ -9,10 +10,15 @@ const Container = styled.div`
     display: flex;
     overflow-y: hidden;
 `;
-const HideSideNavButton = styled.button`
+const ButtonsContainer = styled.div`
     position: absolute;
     bottom: 30px;
     left: 30px;
+    display: flex;
+    flex-flow: column;
+    button {
+        margin-top: 10px;
+    }
 `;
 
 const IS_HIDDEN_SIDE_NAV_LOCALSTORAGE_KEY = 'IS_HIDDEN_SIDE_NAV_LOCALSTORAGE';
@@ -37,9 +43,12 @@ const App: React.FC = () => {
         <Container>
             {!isHiddenSideNav && <SideNav />}
             <Detail />
-            <HideSideNavButton onClick={handleClickHideSideNavButton}>
-                {isHiddenSideNav ? 'Show' : 'Hide'} SideNav
-            </HideSideNavButton>
+            <ButtonsContainer>
+                <FormatButton />
+                <button onClick={handleClickHideSideNavButton}>
+                    {isHiddenSideNav ? 'Show' : 'Hide'} SideNav
+                </button>
+            </ButtonsContainer>
         </Container>
     );
 };
