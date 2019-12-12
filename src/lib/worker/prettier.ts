@@ -16,5 +16,5 @@ console.time('worker:load-prettier');
     ]);
     prettier = p.default || p;
     markdown = m.default || m;
-    console.timeEnd('worker:load-remark');
+    console.timeEnd('worker:load-prettier');
 })();
