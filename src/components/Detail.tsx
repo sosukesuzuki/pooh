@@ -11,9 +11,16 @@ const Container = styled.div`
     width: 100%;
     display: flex;
     textarea {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
         width: 50%;
         resize: none;
         overflow-y: scroll;
+        background-color: #282a36;
+        color: #8be9fd;
     }
     .markdown-body {
         box-sizing: border-box;
