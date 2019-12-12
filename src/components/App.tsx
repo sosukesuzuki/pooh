@@ -38,7 +38,7 @@ const App: React.FC = () => {
             {!isHiddenSideNav && <SideNav />}
             <Detail />
             <HideSideNavButton onClick={handleClickHideSideNavButton}>
-                Hide SideNav
+                {isHiddenSideNav ? 'Show' : 'Hide'} SideNav
             </HideSideNavButton>
         </Container>
     );
