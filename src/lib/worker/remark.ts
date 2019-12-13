@@ -9,16 +9,18 @@ export function compileMarkdown(value: string): string {
 
 console.time('worker:load-remark');
 (async function(): Promise<void> {
-    const [r1, r2, r3, r4] = await Promise.all([
+    const [r1, r2, r3, r4, r5] = await Promise.all([
         import(/* webpackChunkName: "remark" */ 'remark'),
         import(/* webpackChunkName: "remark" */ 'remark-breaks'),
         import(/* webpackChunkName: "remark" */ 'remark-emoji'),
         import(/* webpackChunkName: "remark" */ 'remark-html'),
+        import(/* webpackChunkName: "remark" */ 'remark-highlight.js'),
     ]);
     remark = r1
         .default()
         .use(r2.default)
         .use(r3.default)
-        .use(r4.default);
+        .use(r4.default)
+        .use(r5.default);
     console.timeEnd('worker:load-remark');
 })();

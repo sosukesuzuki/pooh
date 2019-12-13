@@ -6,6 +6,7 @@ import {
     useCompiledMarkdown,
 } from '../lib/contexts';
 import 'github-markdown-css';
+import 'highlight.js/styles/default.css';
 
 const Container = styled.div`
     width: 100%;
