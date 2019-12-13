@@ -14,7 +14,13 @@ const FormatButton: React.FC = () => {
         const formatted = await formatMarkdown(currentFile!.content);
         await updateFile({ id: currentFile!.id, content: formatted });
     }, [currentFile]);
-    return <>{shouldShown && <button onClick={handleClick}>Format</button>}</>;
+    return (
+        <>
+            {shouldShown && (
+                <button onClick={handleClick}>Format(ctrl + shift + f)</button>
+            )}
+        </>
+    );
 };
 
 export default FormatButton;

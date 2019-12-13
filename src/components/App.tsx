@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SideNav from './SideNav';
 import Detail from './Detail';
 import FormatButton from './FormatButton';
+import { useShortcutKeys } from '../lib/hooks';
 
 const Container = styled.div`
     width: 100vw;
@@ -24,6 +25,7 @@ const ButtonsContainer = styled.div`
 const IS_HIDDEN_SIDE_NAV_LOCALSTORAGE_KEY = 'IS_HIDDEN_SIDE_NAV_LOCALSTORAGE';
 
 const App: React.FC = () => {
+    useShortcutKeys();
     const [isHiddenSideNav, setIsHiddenSideNav] = useState(() => {
         return (
             localStorage.getItem(IS_HIDDEN_SIDE_NAV_LOCALSTORAGE_KEY) !==
