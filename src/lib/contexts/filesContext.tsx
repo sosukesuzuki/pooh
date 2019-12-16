@@ -42,8 +42,9 @@ export const useAddFile = () => {
     const { addFile } = useWorkerContext();
     const updateFiles = useUpdateFiles();
     return async () => {
-        await addFile();
+        const file = await addFile();
         await updateFiles();
+        return file;
     };
 };
 export const useUpdateFile = () => {

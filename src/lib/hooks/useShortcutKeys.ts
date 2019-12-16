@@ -1,9 +1,17 @@
 import { useEffect } from 'react';
-import { useWorkerContext, useCurrentFile, useUpdateFile } from '../contexts';
+import {
+    useWorkerContext,
+    useCurrentFile,
+    useUpdateFile,
+    useAddFile,
+    useCurrentFileContext,
+} from '../contexts';
 
 export function useShortcutKeys() {
     const currentFile = useCurrentFile();
     const updateFile = useUpdateFile();
+    const { setCurrentFileId } = useCurrentFileContext();
+    const addFile = useAddFile();
     const { formatMarkdown } = useWorkerContext();
     useEffect(() => {
         async function onWindowKeyDown(ev: KeyboardEvent) {
@@ -18,6 +26,12 @@ export function useShortcutKeys() {
                 }
                 const formatted = await formatMarkdown(currentFile.content);
                 await updateFile({ id: currentFile.id, content: formatted });
+            }
+
+            // ctrl + n
+            if (meta && ev.keyCode === 78) {
+                const file = await addFile();
+                setCurrentFileId(file.id);
             }
         }
         window.addEventListener('keydown', onWindowKeyDown);

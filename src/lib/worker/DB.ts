@@ -13,10 +13,11 @@ export function getFiles(): Promise<File[]> {
     return db.files.toArray();
 }
 
-export function addFile() {
+export async function addFile(): Promise<File> {
     throwNoDexieErrorIfDexieDoesNotExist();
     const newFile = new File();
-    return db.files.add(newFile);
+    await db.files.add(newFile);
+    return newFile;
 }
 
 export function updateFile(payload: { id: string; content: string }) {

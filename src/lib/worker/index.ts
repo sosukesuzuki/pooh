@@ -5,7 +5,7 @@ import { File } from '../models';
 import { format } from './prettier';
 
 export class WorkerAPI {
-    addFile(): Promise<void> {
+    addFile(): Promise<File> {
         return addFile();
     }
     updateFile(payload: { id: string; content: string }): Promise<void> {

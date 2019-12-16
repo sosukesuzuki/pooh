@@ -56,6 +56,7 @@ const FileListItem: React.FC<FileListItemProps> = React.memo(
 );
 
 const SideNav: React.FC = () => {
+    const { setCurrentFileId } = useCurrentFileContext();
     const { files } = useFilesContext();
     const addFile = useAddFile();
     const sortedFiles = useMemo(() => {
@@ -67,9 +68,13 @@ const SideNav: React.FC = () => {
             }
         });
     }, [files]);
+    const handleClickAddButton = useCallback(async () => {
+        const file = await addFile();
+        setCurrentFileId(file.id);
+    }, [addFile, setCurrentFileId]);
     return (
         <Container>
-            <button onClick={addFile}>Add New File</button>
+            <button onClick={handleClickAddButton}>Add New File</button>
             <FileItemList>
                 {sortedFiles.map(file => (
                     <FileListItem key={file.id} {...file} />
