@@ -22,6 +22,8 @@ const Container = styled.div`
         overflow-y: scroll;
         background-color: #282a36;
         color: #8be9fd;
+        font-size: 16px;
+        letter-spacing: 2px;
         font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
             monospace;
     }
