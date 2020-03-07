@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Pooh</title>
-        <meta charset="utf8" />
-    </head>
-    <body>
-        <div class="root"></div>
-        <script type="module">
-            const rootEl = document.querySelector('.root');
-            rootEl.innerHTML = '<h1>...Loading</h1>';
-            try {
-                import('./main.js');
-            } catch (error) {
-                rootEl.innerHTML = `<p>${error.message}</p>`;
-                rootEl.style = 'color: red;';
-            }
-        </script>
-    </body>
+  <head>
+    <title>Pooh</title>
+    <meta charset="utf8" />
+  </head>
+  <body>
+    <div class="root"></div>
+    <script type="module">
+      const rootEl = document.querySelector('.root');
+      rootEl.innerHTML = '<h1>...Loading</h1>';
+      try {
+        import('./main.js');
+      } catch (error) {
+        rootEl.innerHTML = `<p>${error.message}</p>`;
+        rootEl.style = 'color: red;';
+      }
+    </script>
+  </body>
 </html>
