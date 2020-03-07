@@ -2,8 +2,10 @@
 const CopyPlugin = require('copy-webpack-plugin');
 const WorkerPlugin = require('worker-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 const MODE = process.env.NODE_ENV || 'development';
+const PROD = MODE === 'production';
 const DEV = MODE === 'development';
 
 const copyRules = [
@@ -59,5 +61,17 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CopyPlugin(copyRules), new WorkerPlugin()],
+  plugins: [
+    new CopyPlugin(copyRules),
+    new WorkerPlugin(),
+    ...(PROD
+      ? [
+          new GenerateSW({
+            swDest: 'service-worker.js',
+            clientsClaim: true,
+            skipWaiting: true,
+          }),
+        ]
+      : []),
+  ],
 };

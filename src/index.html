@@ -11,6 +11,9 @@
       rootEl.innerHTML = '<h1>...Loading</h1>';
       try {
         import('./main.js');
+        if (location.hostname !== 'localhost') {
+          navigator.serviceWorker.register('/service-worker.js');
+        }
       } catch (error) {
         rootEl.innerHTML = `<p>${error.message}</p>`;
         rootEl.style = 'color: red;';
