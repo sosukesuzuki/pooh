@@ -18,7 +18,7 @@
     "comlink": "^4.2.0",
     "dexie": "^2.0.4",
     "github-markdown-css": "^3.0.1",
-    "highlight.js": "^9.17.1",
+    "highlight.js": "^10.1.2",
     "normalize.css": "^8.0.1",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
