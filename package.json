@@ -27,7 +27,7 @@
     "remark-breaks": "^1.0.3",
     "remark-emoji": "^2.0.2",
     "remark-highlight.js": "^5.2.0",
-    "remark-html": "^10.0.0",
+    "remark-html": "^13.0.2",
     "styled-components": "^4.4.1",
     "uuid": "^3.3.3"
   },
