@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "comlink": "^4.2.0",
-    "dexie": "^2.0.4",
+    "dexie": "^3.2.2",
     "github-markdown-css": "^3.0.1",
     "highlight.js": "^9.17.1",
     "normalize.css": "^8.0.1",
